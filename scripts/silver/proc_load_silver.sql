@@ -180,8 +180,8 @@ BEGIN
             CASE WHEN bdate > GETDATE() THEN NULL
                  ELSE bdate
             END AS bdate,               -- Set future birthdates to NULL
-            CASE WHEN UPPER(TRIM(gen)) IN ('F', 'FEMALE') THEN 'Female'
-                 WHEN UPPER(TRIM(gen)) IN ('M', 'MALE')   THEN 'Male'
+            CASE WHEN UPPER(TRIM(REPLACE(gen, CHAR(13), ''))) IN ('F', 'FEMALE') THEN 'Female'
+                 WHEN UPPER(TRIM(REPLACE(gen, CHAR(13), ''))) IN ('M', 'MALE')   THEN 'Male'
                  ELSE 'n/a'
             END AS gen                  -- Normalize gender values
         FROM bronze.erp_cust_az12;

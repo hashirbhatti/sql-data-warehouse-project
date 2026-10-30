@@ -223,11 +223,11 @@ BEGIN
             subcat,
             maintenance
         )
-        SELECT
+        SELECT DISTINCT
             id,
             cat,
             subcat,
-            maintenance
+            TRIM(REPLACE(REPLACE(maintenance, CHAR(13), ''), CHAR(10), '')) AS maintenance
         FROM bronze.erp_px_cat_g1v2;
         SET @end_time = GETDATE();
         SELECT @row_count = COUNT(*) FROM silver.erp_px_cat_g1v2;
